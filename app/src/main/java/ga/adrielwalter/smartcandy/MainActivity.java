@@ -1,12 +1,14 @@
 package ga.adrielwalter.smartcandy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainActivity extends Activity {
@@ -30,7 +32,18 @@ public class MainActivity extends Activity {
 
         mAdapter = new TravelListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(onItemClickListener);
     }
+
+    TravelListAdapter.OnItemClickListener onItemClickListener = new TravelListAdapter.OnItemClickListener() {
+        @Override
+        public void onItemClick(View v, int position) {
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
+            startActivity(intent);
+        }
+    };
 
     private void setUpActionBar() {
 
