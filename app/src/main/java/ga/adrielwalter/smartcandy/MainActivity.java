@@ -2,6 +2,8 @@ package ga.adrielwalter.smartcandy;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +13,9 @@ public class MainActivity extends Activity {
 
     private Menu menu;
     private boolean isListView;
+    private RecyclerView mRecyclerView;
+    private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private TravelListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +23,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         isListView = true;
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.list);
+        mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+
+        mAdapter = new TravelListAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void setUpActionBar() {
