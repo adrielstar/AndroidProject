@@ -3,12 +3,17 @@ package ga.adrielwalter.smartcandy;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 public class MainActivity extends Activity {
@@ -42,6 +47,16 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(MainActivity.this, DetailActivity.class);
             intent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
             startActivity(intent);
+
+            ImageView placeImage = (ImageView) v.findViewById(R.id.placeImage);
+            LinearLayout placeNameHolder = (LinearLayout) v.findViewById(R.id.placeNameHolder);
+
+            Pair<View, String> imagePair = Pair.create((View) placeImage, "tImage");
+            Pair<View, String> holderPair = Pair.create((View) placeNameHolder, "tNameHolder");
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
+                    imagePair, holderPair);
+            ActivityCompat.startActivity(MainActivity.this, intent, options.toBundle());
         }
     };
 

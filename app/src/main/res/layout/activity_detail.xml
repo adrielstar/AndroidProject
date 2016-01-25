@@ -65,6 +65,7 @@
       android:layout_marginTop="28dp"
       android:src="@drawable/icn_add"
       android:elevation="@dimen/button_elevation"
+      android:alpha="0.0"
       android:contentDescription="@null" android:background="@drawable/btn_background"/>
 
   </FrameLayout>
