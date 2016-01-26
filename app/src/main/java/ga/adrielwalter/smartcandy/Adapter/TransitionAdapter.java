@@ -1,4 +1,4 @@
-package ga.adrielwalter.smartcandy;
+package ga.adrielwalter.smartcandy.Adapter;
 
 import android.transition.Transition;
 

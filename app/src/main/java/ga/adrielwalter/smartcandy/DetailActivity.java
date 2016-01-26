@@ -26,6 +26,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ga.adrielwalter.smartcandy.Adapter.TransitionAdapter;
+
 /**
  * Created by Adriel on 1/25/2016.
  */

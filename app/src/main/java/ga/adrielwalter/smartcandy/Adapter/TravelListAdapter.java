@@ -1,4 +1,4 @@
-package ga.adrielwalter.smartcandy;
+package ga.adrielwalter.smartcandy.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import ga.adrielwalter.smartcandy.Place;
+import ga.adrielwalter.smartcandy.PlaceData;
+import ga.adrielwalter.smartcandy.R;
 
 /**
  * Created by Adriel on 1/25/2016.

@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
+import ga.adrielwalter.smartcandy.Adapter.TravelListAdapter;
+
 
 public class MainActivity extends Activity {
 
