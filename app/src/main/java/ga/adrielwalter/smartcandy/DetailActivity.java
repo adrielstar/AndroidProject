@@ -1,11 +1,18 @@
 package ga.adrielwalter.smartcandy;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.graphics.Palette;
+import android.transition.Transition;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
@@ -35,6 +42,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     private boolean isEditTextVisible;
     private InputMethodManager mInputManager;
     private Place mPlace;
+    private Animatable mAnimatable;
     private ArrayList<String> mTodoList;
     private ArrayAdapter mToDoAdapter;
     int defaultColor;
@@ -79,7 +87,13 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     }
 
     private void windowTransition() {
-
+        getWindow().getEnterTransition().addListener(new TransitionAdapter() {
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                mAddButton.animate().alpha(1.0f);
+                getWindow().getEnterTransition().removeListener(this);
+            }
+        });
     }
 
     private void addToDo(String todo) {
@@ -88,13 +102,18 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     private void getPhoto() {
         Bitmap photo = BitmapFactory.decodeResource(getResources(), mPlace.getImageResourceId(this));
+        colorize(photo);
     }
 
     private void colorize(Bitmap photo) {
+        Palette mPalette = Palette.from(photo).generate();
+        applyPalette(mPalette);
     }
 
-    private void applyPalette() {
-
+    private void applyPalette(Palette mPalette) {
+        getWindow().setBackgroundDrawable(new ColorDrawable(mPalette.getDarkMutedColor(defaultColor)));
+        mTitleHolder.setBackgroundColor(mPalette.getMutedColor(defaultColor));
+        mRevealView.setBackgroundColor(mPalette.getLightVibrantColor(defaultColor));
     }
 
     @Override
@@ -102,26 +121,51 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_add:
                 if (!isEditTextVisible) {
+                    Animatable mAnimatable;
                     revealEditText(mRevealView);
                     mEditTextTodo.requestFocus();
                     mInputManager.showSoftInput(mEditTextTodo, InputMethodManager.SHOW_IMPLICIT);
+                    mAddButton.setImageResource(R.drawable.icn_morph);
+                    mAnimatable = (Animatable) (mAddButton).getDrawable();
+                    mAnimatable.start();
 
                 } else {
                     addToDo(mEditTextTodo.getText().toString());
                     mToDoAdapter.notifyDataSetChanged();
                     mInputManager.hideSoftInputFromWindow(mEditTextTodo.getWindowToken(), 0);
                     hideEditText(mRevealView);
+                    mAddButton.setImageResource(R.drawable.icon_morph_reverse);
+                    mAnimatable = (Animatable) (mAddButton).getDrawable();
+                    mAnimatable.start();
 
                 }
         }
     }
 
     private void revealEditText(LinearLayout view) {
-
+        int cx = view.getRight() - 30;
+        int cy = view.getBottom() - 60;
+        int finalRadius = Math.max(view.getWidth(), view.getHeight());
+        Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadius);
+        view.setVisibility(View.VISIBLE);
+        isEditTextVisible = true;
+        anim.start();
     }
 
     private void hideEditText(final LinearLayout view) {
-
+        int cx = view.getRight() - 30;
+        int cy = view.getBottom() - 60;
+        int initialRadius = view.getWidth();
+        Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, initialRadius, 0);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                view.setVisibility(View.INVISIBLE);
+            }
+        });
+        isEditTextVisible = false;
+        anim.start();
     }
 
     @Override

@@ -7,5 +7,5 @@
         android:icon="@drawable/ic_action_grid"
         android:showAsAction="always"
         android:orderInCategory="100"
-        android:title="Show as grid" />
+        android:title="@string/show_grid" />
 </menu>
