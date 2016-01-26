@@ -15,10 +15,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toolbar;
 
 
 public class MainActivity extends Activity {
 
+    private Toolbar toolbar;
     private Menu menu;
     private boolean isListView;
     private RecyclerView mRecyclerView;
@@ -29,6 +31,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setUpActionBar();
 
         isListView = true;
 
@@ -69,7 +74,12 @@ public class MainActivity extends Activity {
     };
 
     private void setUpActionBar() {
-
+        if (toolbar != null) {
+            setActionBar(toolbar);
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+            getActionBar().setDisplayShowTitleEnabled(true);
+            getActionBar().setElevation(7);
+        }
     }
 
     @Override
