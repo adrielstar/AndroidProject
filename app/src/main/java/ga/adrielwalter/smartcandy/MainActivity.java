@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
             // 1
             Intent transitionIntent = new Intent(MainActivity.this, DetailActivity.class);
             transitionIntent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
+//            Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
+
             ImageView placeImage = (ImageView) v.findViewById(R.id.placeImage);
             LinearLayout placeNameHolder = (LinearLayout) v.findViewById(R.id.placeNameHolder);
             // 2

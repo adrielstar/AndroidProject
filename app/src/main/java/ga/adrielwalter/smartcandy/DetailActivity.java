@@ -63,7 +63,6 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         mAddButton = (ImageButton) findViewById(R.id.btn_add);
         mRevealView = (LinearLayout) findViewById(R.id.llEditTextHolder);
         mEditTextTodo = (EditText) findViewById(R.id.etTodo);
-
         mAddButton.setOnClickListener(this);
         defaultColor = getResources().getColor(R.color.primary_dark);
 
@@ -120,28 +119,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_add:
-                if (!isEditTextVisible) {
-                    Animatable mAnimatable;
-                    revealEditText(mRevealView);
-                    mEditTextTodo.requestFocus();
-                    mInputManager.showSoftInput(mEditTextTodo, InputMethodManager.SHOW_IMPLICIT);
-                    mAddButton.setImageResource(R.drawable.icn_morph);
-                    mAnimatable = (Animatable) (mAddButton).getDrawable();
-                    mAnimatable.start();
 
-                } else {
-                    addToDo(mEditTextTodo.getText().toString());
-                    mToDoAdapter.notifyDataSetChanged();
-                    mInputManager.hideSoftInputFromWindow(mEditTextTodo.getWindowToken(), 0);
-                    hideEditText(mRevealView);
-                    mAddButton.setImageResource(R.drawable.icon_morph_reverse);
-                    mAnimatable = (Animatable) (mAddButton).getDrawable();
-                    mAnimatable.start();
-
-                }
-        }
     }
 
     private void revealEditText(LinearLayout view) {
