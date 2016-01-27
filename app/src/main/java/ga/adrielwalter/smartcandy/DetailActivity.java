@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.transition.Transition;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -86,29 +84,5 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
-        alphaAnimation.setDuration(100);
-        mAddButton.startAnimation(alphaAnimation);
-        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mAddButton.setVisibility(View.GONE);
-                finishAfterTransition();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
     }
 }

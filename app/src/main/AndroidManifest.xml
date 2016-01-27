@@ -25,6 +25,10 @@
             android:name=".DetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name="ga.adrielwalter.smartcandy.DeviceList"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
