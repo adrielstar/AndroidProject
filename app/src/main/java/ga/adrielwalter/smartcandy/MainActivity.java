@@ -67,10 +67,10 @@ public class MainActivity extends Activity {
             Pair<View, String> navPair = Pair.create(navigationBar,
                     Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME);
             Pair<View, String> statusPair = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
-            //Pair<View, String> toolbarPair = Pair.create((View)toolbar, "tActionBar");
+            Pair<View, String> toolbarPair = Pair.create((View)toolbar, "tActionBar");
             // 4
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,
-                    imagePair, holderPair, navPair, statusPair); //toolbarPair
+                    imagePair, holderPair, navPair, statusPair, toolbarPair);
             ActivityCompat.startActivity(MainActivity.this, transitionIntent, options.toBundle());
         }
     };
