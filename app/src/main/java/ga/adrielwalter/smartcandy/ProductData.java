@@ -9,7 +9,7 @@ public class ProductData {
 
     public static String[] placeNameArray = {"Arduino", "Pin Famale", "Stackable", "LCD Screen", "Xbee","NFC RFID"};
 
-    public static ArrayList<Product> placeList() {
+    public static ArrayList<Product> productList() {
         ArrayList<Product> list = new ArrayList<>();
         for (int i = 0; i < placeNameArray.length; i++) {
             Product product = new Product();

@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toolbar;
 
-import ga.adrielwalter.smartcandy.Adapter.TravelListAdapter;
+import ga.adrielwalter.smartcandy.Adapter.ProductListAdapter;
 
 
 public class MainActivity extends Activity {
@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     private boolean isListView;
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private TravelListAdapter mAdapter;
+    private ProductListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +43,13 @@ public class MainActivity extends Activity {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        mAdapter = new TravelListAdapter(this);
+        mAdapter = new ProductListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
-    TravelListAdapter.OnItemClickListener onItemClickListener = new TravelListAdapter.OnItemClickListener() {
+    ProductListAdapter.OnItemClickListener onItemClickListener = new ProductListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View v, int position) {
             // 1
@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
             transitionIntent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
 //            Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
 
-            ImageView placeImage = (ImageView) v.findViewById(R.id.placeImage);
-            LinearLayout placeNameHolder = (LinearLayout) v.findViewById(R.id.placeNameHolder);
+            ImageView placeImage = (ImageView) v.findViewById(R.id.productImage);
+            LinearLayout placeNameHolder = (LinearLayout) v.findViewById(R.id.productNameHolder);
             // 2
             View navigationBar = findViewById(android.R.id.navigationBarBackground);
             View statusBar = findViewById(android.R.id.statusBarBackground);

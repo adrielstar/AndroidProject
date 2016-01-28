@@ -33,10 +33,10 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mProduct = ProductData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
+        mProduct = ProductData.productList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
 
         mList = (ListView) findViewById(R.id.list);
-        mImageView = (ImageView) findViewById(R.id.placeImage);
+        mImageView = (ImageView) findViewById(R.id.productImage);
         mTitle = (TextView) findViewById(R.id.textView);
         mAddButton = (ImageButton) findViewById(R.id.btn_add);
         mAddButton.setOnClickListener(this);

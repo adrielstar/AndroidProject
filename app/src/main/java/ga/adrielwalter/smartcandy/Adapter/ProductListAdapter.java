@@ -21,28 +21,28 @@ import ga.adrielwalter.smartcandy.R;
 /**
  * Created by Adriel on 1/25/2016.
  */
-public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.ViewHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ViewHolder> {
 
     Context mContext;
     OnItemClickListener mItemClickListener;
 
-    public TravelListAdapter(Context context) {
+    public ProductListAdapter(Context context) {
         this.mContext = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public LinearLayout placeHolder;
-        public LinearLayout placeNameHolder;
-        public TextView placeName;
-        public ImageView placeImage;
+        public LinearLayout productHolder;
+        public LinearLayout productNameHolder;
+        public TextView productName;
+        public ImageView productImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            placeHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
-            placeName = (TextView) itemView.findViewById(R.id.placeName);
-            placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
-            placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
-            placeHolder.setOnClickListener(this);
+            productHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
+            productName = (TextView) itemView.findViewById(R.id.productName);
+            productNameHolder = (LinearLayout) itemView.findViewById(R.id.productNameHolder);
+            productImage = (ImageView) itemView.findViewById(R.id.productImage);
+            productHolder.setOnClickListener(this);
         }
 
         @Override
@@ -63,27 +63,27 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return new ProductData().placeList().size();
+        return new ProductData().productList().size();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_places, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_products, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Product product = new ProductData().placeList().get(position);
-        holder.placeName.setText(product.name);
-        Picasso.with(mContext).load(product.getImageResourceId(mContext)).into(holder.placeImage);
+        final Product product = new ProductData().productList().get(position);
+        holder.productName.setText(product.name);
+        Picasso.with(mContext).load(product.getImageResourceId(mContext)).into(holder.productImage);
 
         Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), product.getImageResourceId(mContext));
 
         Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 int bgColor = palette.getMutedColor(mContext.getResources().getColor(android.R.color.black));
-                holder.placeNameHolder.setBackgroundColor(bgColor);
+                holder.productNameHolder.setBackgroundColor(bgColor);
             }
         });
     }

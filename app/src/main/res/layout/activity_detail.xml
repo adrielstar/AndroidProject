@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-      android:id="@+id/placeImage"
+      android:id="@+id/productImage"
       android:layout_width="match_parent"
       android:layout_height="220dp"
       android:scaleType="centerCrop"
@@ -26,7 +26,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-      android:id="@+id/placeNameHolder"
+      android:id="@+id/productNameHolder"
       android:layout_width="match_parent"
       android:layout_height="60dp"
       android:background="@color/primary_dark"

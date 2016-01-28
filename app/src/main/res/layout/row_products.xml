@@ -10,7 +10,7 @@
     card_view:cardElevation="@dimen/card_elevation">
 
     <ImageView
-        android:id="@+id/placeImage"
+        android:id="@+id/productImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
@@ -25,7 +25,7 @@
         android:orientation="horizontal" />
 
     <LinearLayout
-        android:id="@+id/placeNameHolder"
+        android:id="@+id/productNameHolder"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="bottom"
@@ -33,7 +33,7 @@
         android:transitionName="tNameHolder">
 
         <TextView
-            android:id="@+id/placeName"
+            android:id="@+id/productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
