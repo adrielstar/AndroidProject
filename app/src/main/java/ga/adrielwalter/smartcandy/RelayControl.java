@@ -7,11 +7,10 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +18,9 @@ import java.io.IOException;
 import java.util.UUID;
 
 
-public class ledControl extends ActionBarActivity {
+public class RelayControl extends AppCompatActivity {
 
     Button btnOn, btnOff, btnDis;
-    SeekBar brightness;
     TextView lumn;
     String address = null;
     private ProgressDialog progress;
@@ -40,14 +38,13 @@ public class ledControl extends ActionBarActivity {
         Intent newint = getIntent();
         address = newint.getStringExtra(DeviceList.EXTRA_ADDRESS); //receive the address of the bluetooth device
 
-        //view of the ledControl
-        setContentView(R.layout.activity_led_control);
+        //view of the RelayControl
+        setContentView(R.layout.activity_relay_control);
 
         //call the widgtes
         btnOn = (Button)findViewById(R.id.button2);
         btnOff = (Button)findViewById(R.id.button3);
         btnDis = (Button)findViewById(R.id.button4);
-        brightness = (SeekBar)findViewById(R.id.seekBar);
         lumn = (TextView)findViewById(R.id.lumn);
 
         new ConnectBT().execute(); //Call the class to connect
@@ -58,7 +55,7 @@ public class ledControl extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
-                turnOnLed();      //method to turn on
+                turnOnRelay();      //method to turn on
             }
         });
 
@@ -66,7 +63,7 @@ public class ledControl extends ActionBarActivity {
             @Override
             public void onClick(View v)
             {
-                turnOffLed();   //method to turn off
+                turnOffRelay();   //method to turn off
             }
         });
 
@@ -76,34 +73,6 @@ public class ledControl extends ActionBarActivity {
             public void onClick(View v)
             {
                 Disconnect(); //close connection
-            }
-        });
-
-        brightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser==true)
-                {
-                    lumn.setText(String.valueOf(progress));
-                    try
-                    {
-                        btSocket.getOutputStream().write(String.valueOf(progress).getBytes());
-                    }
-                    catch (IOException e)
-                    {
-
-                    }
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
     }
@@ -117,13 +86,29 @@ public class ledControl extends ActionBarActivity {
                 btSocket.close(); //close connection
             }
             catch (IOException e)
-            { msg("Error");}
+            { msg("Lost Connection");}
         }
         finish(); //return to the first layout
 
     }
 
-    private void turnOffLed()
+    // Turn relay on
+    private void turnOnRelay()
+    {
+        if (btSocket!=null)
+        {
+            try
+            {
+                btSocket.getOutputStream().write("1".getBytes());
+            }
+            catch (IOException e)
+            {
+                msg("Error");
+            }
+        }
+    }
+
+    private void turnOffRelay()
     {
         if (btSocket!=null)
         {
@@ -138,20 +123,7 @@ public class ledControl extends ActionBarActivity {
         }
     }
 
-    private void turnOnLed()
-    {
-        if (btSocket!=null)
-        {
-            try
-            {
-                btSocket.getOutputStream().write("1".getBytes());
-            }
-            catch (IOException e)
-            {
-                msg("Error");
-            }
-        }
-    }
+
 
     // fast way to call Toast
     private void msg(String s)
@@ -173,7 +145,7 @@ public class ledControl extends ActionBarActivity {
         @Override
         protected void onPreExecute()
         {
-            progress = ProgressDialog.show(ledControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
+            progress = ProgressDialog.show(RelayControl.this, "Connecting...", "Please wait!!!");  //show a progress dialog
         }
 
         @Override

@@ -4,7 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
-public class DeviceList extends ActionBarActivity
+public class DeviceList extends AppCompatActivity
 {
     //widgets
     Button btnPaired;
@@ -98,10 +98,10 @@ public class DeviceList extends ActionBarActivity
             String address = info.substring(info.length() - 17);
 
             // Make an intent to start next activity.
-            Intent i = new Intent(DeviceList.this, ledControl.class);
+            Intent i = new Intent(DeviceList.this, RelayControl.class);
 
             //Change the activity.
-            i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
+            i.putExtra(EXTRA_ADDRESS, address); //this will be received at RelayControl (class) Activity
             startActivity(i);
         }
     };

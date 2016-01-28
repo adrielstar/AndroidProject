@@ -5,7 +5,7 @@ import android.content.Context;
 /**
  * Created by Adriel on 1/25/2016.
  */
-public class Place {
+public class Product {
 
     public String name;
     public String imageName;

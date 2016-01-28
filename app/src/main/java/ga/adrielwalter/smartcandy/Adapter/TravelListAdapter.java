@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import ga.adrielwalter.smartcandy.Place;
-import ga.adrielwalter.smartcandy.PlaceData;
+import ga.adrielwalter.smartcandy.Product;
+import ga.adrielwalter.smartcandy.ProductData;
 import ga.adrielwalter.smartcandy.R;
 
 /**
@@ -63,7 +63,7 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return new PlaceData().placeList().size();
+        return new ProductData().placeList().size();
     }
 
     @Override
@@ -74,11 +74,11 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Place place = new PlaceData().placeList().get(position);
-        holder.placeName.setText(place.name);
-        Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
+        final Product product = new ProductData().placeList().get(position);
+        holder.placeName.setText(product.name);
+        Picasso.with(mContext).load(product.getImageResourceId(mContext)).into(holder.placeImage);
 
-        Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), place.getImageResourceId(mContext));
+        Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), product.getImageResourceId(mContext));
 
         Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {

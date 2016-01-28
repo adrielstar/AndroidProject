@@ -25,6 +25,20 @@
             android:name=".DetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".DeviceList"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name=".DeviceList" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RelayControl"
+            android:label="LED Control" >
+        </activity>
     </application>
 
 </manifest>

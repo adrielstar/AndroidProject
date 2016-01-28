@@ -1,14 +1,13 @@
 package ga.adrielwalter.smartcandy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.transition.Transition;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,7 +25,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     private ImageView mImageView;
     private TextView mTitle;
     private ImageButton mAddButton;
-    private Place mPlace;
+    private Product mProduct;
     int defaultColor;
 
     @Override
@@ -34,7 +33,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mPlace = PlaceData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
+        mProduct = ProductData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
 
         mList = (ListView) findViewById(R.id.list);
         mImageView = (ImageView) findViewById(R.id.placeImage);
@@ -55,8 +54,8 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     private void loadPlace() {
 
-        mTitle.setText(mPlace.name);
-        mImageView.setImageResource(mPlace.getImageResourceId(this));
+        mTitle.setText(mProduct.name);
+        mImageView.setImageResource(mProduct.getImageResourceId(this));
     }
 
     private void windowTransition() {
@@ -70,7 +69,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
     }
 
        private void getPhoto() {
-        Bitmap photo = BitmapFactory.decodeResource(getResources(), mPlace.getImageResourceId(this));
+        Bitmap photo = BitmapFactory.decodeResource(getResources(), mProduct.getImageResourceId(this));
         colorize(photo);
     }
 
@@ -85,30 +84,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, 0.0f);
-        alphaAnimation.setDuration(100);
-        mAddButton.startAnimation(alphaAnimation);
-        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                mAddButton.setVisibility(View.GONE);
-                finishAfterTransition();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
+        Intent intent = new Intent(this, DeviceList.class);
+        startActivity(intent);
     }
 }
