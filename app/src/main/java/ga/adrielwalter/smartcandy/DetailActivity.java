@@ -84,7 +84,7 @@ public class DetailActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, DeviceList.class);
+        Intent intent = new Intent(this, CheckoutActivity.class);
         startActivity(intent);
     }
 }
